@@ -44,9 +44,6 @@ class AMON:
         self.alert = len(self.new_events) > 0
         return
     
-def main():
-    stream = AMON()    
-    return
     
 if __name__ == "__main__":
-    main()
+    stream = AMON()
