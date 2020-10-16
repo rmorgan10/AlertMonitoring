@@ -32,7 +32,7 @@ class AMON:
         """
         Create a second dataframe with only new events
         """
-        old_events = pd.read_csv('previous_alerts.csv')
+        old_events = pd.read_csv('data/previous_alerts.csv')
         merged_df = old_events.merge(self.df, how='right', indicator=True)
         self.new_events = merged_df[merged_df['_merge'].values == 'right_only'].copy().reset_index(drop=True)
         return
