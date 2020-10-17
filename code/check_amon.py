@@ -32,7 +32,7 @@ class AMON:
         """
         Create a second dataframe with only new events
         """
-        old_events = pd.read_csv('data/previous_alerts.csv')
+        old_events = pd.read_csv('../data/previous_alerts.csv')
         merged_df = old_events.merge(self.df, how='right', indicator=True)
         self.new_events = merged_df[merged_df['_merge'].values == 'right_only'].copy().reset_index(drop=True)
         return
@@ -46,7 +46,7 @@ class AMON:
     
     def save_alerts(self):
         # read previous alerts
-        stream = open('data/previous_alerts.csv', 'r')
+        stream = open('../data/previous_alerts.csv', 'r')
         existing_alerts = stream.readlines()
         stream.close()
         
@@ -57,7 +57,7 @@ class AMON:
         full_alerts = [existing_alerts[0]] + out_data + existing_alerts[1:]
         
         # write all alerts
-        stream = open('data/previous_alerts.csv', 'w+')
+        stream = open('../data/previous_alerts.csv', 'w+')
         stream.writelines(full_alerts)
         stream.close()
         return

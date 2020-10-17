@@ -56,14 +56,16 @@ def event_page(alert, events):
                    "![]({}_fov.png)\n".format(event.observatory.name))
 
     # create README file
-    filename = alert.name + '_' + str(alert.revision) + '/README.md'
+    filename = '../' + alert.name + '_' + str(alert.revision) + '/README.md'
     with open(filename, 'w+') as stream:
         stream.writelines(report)
         
     return
 
 def git_push(message="commit message"):
+    os.chdir('..')
     os.system('git add .')
     os.system('git commit -m "{}"'.format(message))
     os.system('git push')
+    os.chdir('code')
     return

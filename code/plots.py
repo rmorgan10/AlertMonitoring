@@ -176,7 +176,7 @@ def plot_skymap(event):
 
 def save(fig, event, alert, plot_type):
     event_dir = alert.name + '_' + str(alert.revision) + '/'
-    fig.savefig(event_dir + event.observatory.name + '_' + plot_type + '.png')
+    fig.savefig('../' + event_dir + event.observatory.name + '_' + plot_type + '.png')
     return
 
 def make_plots(event, alert):

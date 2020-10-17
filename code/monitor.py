@@ -37,7 +37,7 @@ if len(alerts) != 0:
     for alert in alerts:
         
         # make an alert directory
-        os.mkdir(alert.name + '_' + str(alert.revision))
+        os.mkdir('../' + alert.name + '_' + str(alert.revision))
         
         # process events
         events = []
