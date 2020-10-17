@@ -124,12 +124,12 @@ class Event:
         return
     
 
-    def make_json(self):
-        outfile = 'output/icecube_%s_%s.json'%(self.eventid,
-                                               utils.datestring(self.optimal_time))
-        sispi = icecube_json.makeJson(self.ra, self.dec, self.eventid, self.optimal_time)
-        icecube_json.writeJson(outfile, sispi)
-        return
+    #def make_json(self):
+    #    outfile = 'output/icecube_%s_%s.json'%(self.eventid,
+    #                                           utils.datestring(self.optimal_time))
+    #    sispi = icecube_json.makeJson(self.ra, self.dec, self.eventid, self.optimal_time)
+    #    icecube_json.writeJson(outfile, sispi)
+    #    return
 
     def forecast(self):
 
