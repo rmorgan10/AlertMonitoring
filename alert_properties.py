@@ -18,6 +18,7 @@ class Alert:
         self.revision = int(row['Rev'])
         self.time_UT = pd.to_datetime(str(row['Date']) + 'T' + str(row['Time UT']),
                                       format="%y/%m/%dT%H:%M:%S.%f")
+        self.name = "IC" + self.time_UT.strftime("%y%m%d") + 'A'
         return
         
 def make_alert_list(amon_df):
