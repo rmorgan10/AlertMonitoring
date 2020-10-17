@@ -93,46 +93,48 @@ def plot_airmass(event):
     return fig, ax
 
 
-def plot_fov(alert):
-    decam_boundaries = decam.get_centered_deg_fov(alert.ra, alert.dec)
+def plot_fov(event, alert):
     
-    fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+    fig = plt.figure(figsize=(5, 5))
+    ax = fig.add_subplot(111)
     
-    def make_ic_patches(alert):
-        return {'circ50': Circle((alert.ra, alert.dec), radius=alert.err50/60.0,
-                                 edgecolor='None', lw=3, facecolor='gray', alpha=0.2),
-                'circ90': Circle((alert.ra, alert.dec), radius=alert.err90/60.0,
-                                 edgecolor='None', lw=3, facecolor='gray', alpha=0.2),
-                'circ50_border': Circle((alert.ra, alert.dec), radius=alert.err50/60.0, 
-                                        edgecolor='crimson', lw=3, facecolor='None'),
-                'circ90_border': Circle((alert.ra, alert.dec), radius=alert.err90/60.0, 
-                                        edgecolor='crimson', lw=3, facecolor='None', ls='--')}
-    
-    # IceCube
-    for ax in axs:
-        circles = make_ic_patches(alert)
-        ax.add_patch(circles['circ50'])
-        ax.add_patch(circles['circ90'])
-        ax.add_patch(circles['circ50_border'])
-        ax.add_patch(circles['circ90_border'])
-        ax.scatter(alert.ra, alert.dec, marker='x', color='crimson', s=90, zorder=20)
-    
+    # IceCube stuff
+    circles = {'circ50': Circle((alert.ra, alert.dec), radius=alert.err50/60.0,
+                                edgecolor='None', lw=3, facecolor='gray', alpha=0.2),
+               'circ90': Circle((alert.ra, alert.dec), radius=alert.err90/60.0,
+                                edgecolor='None', lw=3, facecolor='gray', alpha=0.2),
+               'circ50_border': Circle((alert.ra, alert.dec), radius=alert.err50/60.0, 
+                                       edgecolor='crimson', lw=3, facecolor='None'),
+               'circ90_border': Circle((alert.ra, alert.dec), radius=alert.err90/60.0, 
+                                       edgecolor='crimson', lw=3, facecolor='None', ls='--')}
+    ax.add_patch(circles['circ50'])
+    ax.add_patch(circles['circ90'])
+    ax.add_patch(circles['circ50_border'])
+    ax.add_patch(circles['circ90_border'])
+    ax.scatter(alert.ra, alert.dec, marker='x', color='crimson', s=90, zorder=20)
+
     # DECam
-    for ccd, coords in decam_boundaries.items():
-        x = [k[0] for k in coords]
-        y = [k[1] for k in coords]
-        axs[0].plot(x, y, color='0.3')
-    axs[0].set_title("Blanco / DECam", fontsize=16)
+    if event.observatory.name == 'CTIO':
         
-    # ODI
-    width, height = 40.0 / 60.0, 48.0 / 60.0 # 40' x 48'
-    right_pointing = Rectangle((alert.ra, alert.dec - 0.5*height), 
-                               width, height, fill=False, color='0.3', zorder=20, lw=2)
-    left_pointing = Rectangle((alert.ra - width, alert.dec - 0.5*height), 
-                              width, height, fill=False, color='0.3', zorder=20, lw=2)
-    axs[1].add_patch(right_pointing)
-    axs[1].add_patch(left_pointing)
-    axs[1].set_title("WIYN / ODI", fontsize=16)
+        decam_boundaries = decam.get_centered_deg_fov(alert.ra, alert.dec)
+        for ccd, coords in decam_boundaries.items():
+            x = [k[0] for k in coords]
+            y = [k[1] for k in coords]
+            ax.plot(x, y, color='0.3')
+        ax.set_title("Blanco / DECam", fontsize=16)
+    
+    elif event.observatory.name == 'KPNO':
+        width, height = 40.0 / 60.0, 48.0 / 60.0 # 40' x 48'
+        right_pointing = Rectangle((alert.ra, alert.dec - 0.5*height), 
+                                   width, height, fill=False, color='0.3', zorder=20, lw=2)
+        left_pointing = Rectangle((alert.ra - width, alert.dec - 0.5*height), 
+                                  width, height, fill=False, color='0.3', zorder=20, lw=2)
+        ax.add_patch(right_pointing)
+        ax.add_patch(left_pointing)
+        ax.set_title("WIYN / ODI", fontsize=16)
+    
+    else:
+        raise NotImplementedError("Only CTIO and KPNO are allowed observatories.")
     
     # plot params
     for ax in axs:
@@ -171,3 +173,28 @@ def plot_skymap(event):
     fig = plt.gcf()
     ax = plt.gca()
     return fig, ax
+
+def save(fig, event, alert, plot_type):
+    event_dir = alert.name + '_' + str(alert.revision) + '/'
+    fig.savefig(event_dir + event.observatory.name + '_' + plot_type + '.png')
+    return
+
+def make_plots(event, alert):
+    # skymap
+    fig, ax = plot_skymap(event)
+    save(fig, event, alert, 'skymap')
+    
+    # forecast
+    fig, ax = plot_forecast(event)
+    save(fig, event, alert, 'forecast')
+    
+    # airmass
+    fig, ax = plot_airmass(event)
+    save(fig, event, alert, 'airmass')
+    
+    # fov
+    fig, ax = plot_fov(event, alert)
+    save(fig, event, alert, 'fov')
+    
+    return
+    
