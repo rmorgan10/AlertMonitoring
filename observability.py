@@ -1,13 +1,16 @@
 # functions to calculate observability metrics
 
+from datetime import timedelta
+
 import ephem
+import healpy
 import numpy as np
 
 import utils
 
 class Event:
 
-    def __init__(self, ra, dec, search_time=None, eventid=None, tag=None,
+    def __init__(self, ra, dec, observatory, search_time=None, eventid=None, tag=None,
                  sun_alt_threshold=-14., moon_avoidance=False, save=False, plot=False):
         """
         ra and dec in degrees
@@ -31,27 +34,13 @@ class Event:
 
         self.sun_alt_threshold = sun_alt_threshold
 
-        self.observatory = utils.ctio()
+        self.observatory = observatory
         self.observatory.date = self.search_time
 
-        if save:
-            outfile_airmass = 'png'
-            outfile_skymap = 'png'
-            outfile_ortho = 'png'
-            outfile_diagnostics = 'txt'
-        else:
-            outfile_airmass = None
-            outfile_skymap = None
-            outfile_ortho = None
-            outfile_diagnostics = None
-
-        self.optimal_time(search_interval=1., plot=plot, outfile=outfile_airmass, moon_avoidance=moon_avoidance)
-        self.skymap(outfile=outfile_skymap)
-        self.diagnostics(outfile=outfile_diagnostics)
-        self.make_json()
+        self.optimal_time(search_interval=1., plot=plot, moon_avoidance=moon_avoidance)
         return
 
-    def optimalTime(self, search_interval=1., plot=True, outfile=None, moon_avoidance=False):
+    def optimal_time(self, search_interval=1., plot=True, moon_avoidance=False):
         """
         Search interval in days
         """
@@ -75,6 +64,10 @@ class Event:
             airmass_array[ii] = utils.getAirmass(ra_zenith, dec_zenith, self.ra, self.dec)
         
         self.observatory.date = self.search_time
+        self.time_shift_array = time_shift_array
+        self.airmass_array = airmass_array
+        self.sun_alt_array = sun_alt_array
+        self.moon_alt_array = moon_alt_array
 
         # Optimal time
         if not moon_avoidance:
@@ -87,17 +80,22 @@ class Event:
 
         return
 
-    def diagnostics(self, outfile=None):
-        
+    def diagnostics(self, return_lines=True):
+        # calculate metrics
         self.observatory.date = self.search_time
-
         sun = ephem.Sun(self.optimal_time)
         ra_sun, dec_sun = np.degrees(sun.ra), np.degrees(sun.dec)
         moon = ephem.Moon(self.optimal_time)
         ra_moon, dec_moon = np.degrees(moon.ra), np.degrees(moon.dec)
         sfd = utils.openEBVMap()
         nside = healpy.npix2nside(len(sfd))
+        
+        # store necessary properties
+        self.sun_sep = utils.angsep(self.ra, self.dec, ra_sun, dec_sun)
+        self.moon_sep = utils.angsep(self.ra, self.dec, ra_moon, dec_moon)
+        self.moon_illum = moon.moon_phase
 
+        # make report
         lines = ['Event',
                  '  Event ID = %s'%(self.eventid),
                  '  (ra, dec) = (%.4f, %.4f)'%(self.ra, self.dec),
@@ -107,12 +105,12 @@ class Event:
                  '  Optimal time = %s (UTC)'%(self.optimal_time.__str__()),
                  '  Airmass at optimal time = %.2f'%(self.minimum_airmass),
                  'Sun',
-                 '  Angular separation = %.2f (deg)'%(utils.angsep(self.ra, self.dec, ra_sun, dec_sun)),    
+                 '  Angular separation = %.2f (deg)'%(self.sun_sep),    
                  '  Next rising = %s (UTC)'%(self.observatory.next_rising(ephem.Sun()).__str__()),
                  '  Next setting = %s (UTC)'%(self.observatory.next_setting(ephem.Sun()).__str__()),
                  'Moon',
                  '  Illumination = %.2f'%(moon.moon_phase),
-                 '  Angular separation = %.2f (deg)'%(utils.angsep(self.ra, self.dec, ra_moon, dec_moon)),
+                 '  Angular separation = %.2f (deg)'%(self.moon_sep),
                  '  Next rising = %s (UTC)'%(self.observatory.next_rising(ephem.Moon()).__str__()),
                  '  Next setting = %s (UTC)'%(self.observatory.next_setting(ephem.Moon()).__str__()),
                  '  Next new moon = %s (UTC)'%(ephem.next_new_moon(ephem.now()).__str__()),
@@ -120,14 +118,9 @@ class Event:
                  'Galactic',
                  '  (l, b) = (%.4f, %.4f)'%(self.glon, self.glat),
                  '  E(B-V) = %.2f'%(sfd[utils.angToPix(nside, self.glon, self.glat)])]
-
-        if outfile:
-            outfile = 'output/icecube_%s_diagnostics_%s.%s'%(self.eventid, utils.datestring(self.optimal_time), outfile)
-            writer = open(outfile, 'w')
-            for line in lines:
-                writer.write(line + '\n')
-            writer.close()
-
+        
+        if return_lines:
+            return lines
         return
     
 
@@ -136,3 +129,20 @@ class Event:
                                                utils.datestring(self.optimal_time))
         sispi = icecube_json.makeJson(self.ra, self.dec, self.eventid, self.optimal_time)
         icecube_json.writeJson(outfile, sispi)
+        return
+
+    def forecast(self):
+
+        airmasses, sun_seps, moon_seps, moon_illums = [], [], [], []
+
+        for day in range(31):
+            search_time = self.search_time.datetime() + timedelta(days=day)
+            new_event = Event(self.ra, self.dec, self.observatory, search_time=search_time)
+            new_event.diagnostics(return_lines=False)
+
+            airmasses.append(new_event.minimum_airmass)
+            sun_seps.append(new_event.sun_sep)
+            moon_seps.append(new_event.moon_sep)
+            moon_illums.append(new_event.moon_illum)
+
+        return airmasses, sun_seps, moon_seps, moon_illums
