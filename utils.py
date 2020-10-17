@@ -15,6 +15,20 @@ def ctio():
     observatory.lon = LON_CTIO
     observatory.lat = LAT_CTIO
     observatory.elevation = ELEVATION_CTIO
+    observatory.name = 'CTIO'
+    return observatory
+
+def kpno():
+    # wikipedia
+    LON_KPNO = '-111:35:48.12'
+    LAT_KPNO = '31:57:29.88'  
+    ELEVATION_KPNO = 2096.0 # m
+
+    observatory = ephem.Observer()
+    observatory.lon = LON_KPNO
+    observatory.lat = LAT_KPNO
+    observatory.elevation = ELEVATION_KPNO
+    observatory.name = 'KPNO'
     return observatory
 
 ############################################################
