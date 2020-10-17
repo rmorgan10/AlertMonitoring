@@ -20,7 +20,7 @@ class AMON:
 
     def _query_amon(self):
         """
-        Scrape all events from AMON website
+        Scrape all events from GOLD and BRONZE website
         """
         web_data = pd.read_html(self.url)
         data = web_data[0].values
@@ -41,9 +41,26 @@ class AMON:
         """
         Check if there are new events
         """
-        self.alert = len(self.new_events) > 0
+        self.new_alert = len(self.new_events) > 0
         return
     
+    def save_alerts(self):
+        # read previous alerts
+        stream = open('data/previous_alerts.csv', 'r')
+        existing_alerts = stream.readlines()
+        stream.close()
+        
+        # format new alerts
+        out_data = []
+        for index, row in self.new_events.iterrows():
+            out_data.append(row['RunNum_EventNum'] + ',' + str(row['Rev']) + '\n')
+        full_alerts = [existing_alerts[0]] + out_data + existing_alerts[1:]
+        
+        # write all alerts
+        stream = open('data/previous_alerts.csv', 'w+')
+        stream.writelines(full_alerts)
+        stream.close()
+        return
     
 if __name__ == "__main__":
     stream = AMON()
