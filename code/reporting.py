@@ -46,16 +46,16 @@ def event_page(alert, events):
               alert.time_UT.strftime("%m/%d/%Y  %H:%M:%S") + " | "
               "%.3f" %(alert.energy) + " | " + "%.3f" %(alert.signalness) + " | "
               "%.6f" %(alert.far) + " | %.2f |\n\n" %(math.pi * (alert.err90 / 60)**2) +
-              "[Link to IceCube Alert Details](https://gcn.gsfc.nasa.gov/gcn/notices_amon_g_b/"
-              "{0}_{1}.amon)\n\n".format(alert.run_num, alert.event_num) +
+              '<a href="https://gcn.gsfc.nasa.gov/gcn/notices_amon_g_b/{0}_{1}.amon" target="_blank">'.format(alert.run_num, alert.event_num) +
+              'Link to IceCube Alert Details</a>\n\n'
               '<a href="https://rmorgan10.github.io/AlertMonitoring/{0}/{1}_skymap.png" target="_blank">\n'.format(alert.name, events[0].observatory.name) +
               '  <img src="{0}_skymap.png" alt="{1} Skymap" style="width:700px;height:400px;">\n'.format(events[0].observatory.name, events[0].observatory.name) +
               '</a>\n\n')
     
     for event in events:
         report += ("\n## {} Report\n\n".format(event.observatory.name) +
-                   "### Observations Start at {} Madison Time".format(event.optimal_madison_time) + 
-                   "### Alert Diagnostics\n\n```")
+                   "### Observations Start at  `{}`  Madison Time".format(event.optimal_madison_time) + 
+                   "\n\n### Alert Diagnostics\n\n```")
         for line in event.diagnostics(return_lines=True):
             report += line + '\n'
 
@@ -81,7 +81,7 @@ def main_page(alert):
     name = alert.name + '_' + str(alert.revision)
     link = "https://rmorgan10.github.io/AlertMonitoring/" + name + '/'
     with open('README.md', 'a') as stream:
-        stream.write('- [{0}]({1})'.format(name, link))
+        stream.write('\n- [{0}]({1})'.format(name, link))
     os.chdir('code')
     return
 
@@ -103,7 +103,7 @@ def send_text(to_number, carrier, message):
                 'verizon': '@vtext.com',
                 'sprint': '@page.nextel.com'}
 
-    to_address = to_number + get_carrier_address(carrier)
+    to_address = to_number + carriers[carrier]
 
     # Log in to gmail account
     server = smtplib.SMTP("smtp.gmail.com", 587)
