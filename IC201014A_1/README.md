@@ -6,7 +6,9 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | BRONZE | 10/14/2020  02:13:27 | 146.930 | 0.414 | 1.706900 | 2.22 |
 
-![](skymap.png)
+a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_skymap.png" target="_blank">
+  <img src="CTIO_skymap.png" alt="CTIO Skymap" style="width:700px;height:233px;">
+</a> 
 
 CTIO Report
 
@@ -38,14 +40,14 @@ Galactic
 ### Observability Plots
 
 <a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_forecast.png" target="_blank">
-  <img src="CTIO_forecast.png" alt="CTIO Forecast" style="width:700px;height:300px;">
+  <img src="CTIO_forecast.png" alt="CTIO Forecast" style="width:700px;height:233px;">
 </a> 
 
 <a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_airmass.png" target="_blank">
-  <img src="CTIO_airmass.png" alt="CTIO Airmass" style="width:350px;height:350px;">
+  <img src="CTIO_airmass.png" alt="CTIO Airmass" style="width:345px;height:345px;">
 </a> 
 <a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_fov.png" target="_blank">
-  <img src="CTIO_fov.png" alt="CTIO FoV" style="width:350px;height:350px;">
+  <img src="CTIO_fov.png" alt="CTIO FoV" style="width:345px;height:345px;">
 </a> 
 
 KPNO Report
