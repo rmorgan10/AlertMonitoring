@@ -54,7 +54,7 @@ def event_page(alert, events):
     
     for event in events:
         report += ("\n## {} Report\n\n".format(event.observatory.name) +
-                   "### Observations Start at  `{}`  Madison Time".format(event.optimal_madison_time) + 
+                   "*Observations Start at*  `{}`  *Madison Time*".format(event.optimal_madison_time) + 
                    "\n\n### Alert Diagnostics\n\n```")
         for line in event.diagnostics(return_lines=True):
             report += line + '\n'
