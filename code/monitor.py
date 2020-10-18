@@ -66,6 +66,8 @@ if len(alerts) != 0:
         for number, carrier in zip(numbers, carriers):
             send_text(number, carrier, body + signoff)
 
+        continue
+            
         ## - email
         for receiving_email in receiving_emails:
             send_email(body + signoff, subject, receiving_email)
