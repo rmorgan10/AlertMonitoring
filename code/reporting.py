@@ -35,7 +35,7 @@ def event_page(alert, events):
     if not isinstance(events, list):
         events = [events]
     
-    report = ("# {0} ({1}_{2})\n\n".format(alert.name, alert.event_num, alert.run_num) + 
+    report = ("# {0} ({1}_{2})\n\n".format(alert.name, alert.run_num, alert.event_num) + 
               "### IceCube Data\n\n"
               "| Rev | Type | Time (UTC) | Energy (TeV) | Signalness | FAR (#/yr) | 90% Area (sq. deg.) |\n"
               "| --- | --- | --- | --- | --- | --- | --- |\n"
