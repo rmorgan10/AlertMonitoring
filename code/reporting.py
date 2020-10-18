@@ -1,10 +1,13 @@
 # functions to create reports
 
 from email.mime.text import MIMEText
+import json
 import math
 import os
 import platform
+import shelex
 import smtplib
+import subprocess
 import sys
 
 def send_email(body, subject, receiver):
@@ -103,5 +106,31 @@ def text_message(to_number, carrier, message):
 
     # send message
     server.sendmail(auth[0], to_address, message)
+    
+    return
+
+def slack_post(message, webhook):
+
+    def run(string):
+        """ run a UNIX command """
+
+        # shlex.split will preserve inner quotes
+        prog = shlex.split(string)
+        p0 = subprocess.Popen(prog, stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT)
+        
+        stdout0, stderr0 = p0.communicate()
+        rc = p0.returncode
+        p0.stdout.close()
+
+        return stdout0, stderr0, rc
+
+    """ Styles a slack post and pushes it to slack """
+
+    payload = {}
+    payload["text"] = message
+    
+    cmd = "curl -X POST --data-urlencode 'payload={}' {}".format(json.dumps(payload), webhook)
+    run(cmd)
     
     return
