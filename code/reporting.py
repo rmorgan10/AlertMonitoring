@@ -5,7 +5,7 @@ import json
 import math
 import os
 import platform
-import shelex
+import shlex
 import smtplib
 import subprocess
 import sys
@@ -93,7 +93,7 @@ def git_push(message="commit message"):
     os.chdir('code')
     return
 
-def text_message(to_number, carrier, message):
+def send_text(to_number, carrier, message):
 
     with open('.cred', 'r') as creds:
         auth = [x.strip() for x in creds.readlines()]
