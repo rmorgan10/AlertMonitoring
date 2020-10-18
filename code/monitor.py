@@ -62,19 +62,26 @@ if len(alerts) != 0:
         body += alert.name + '_' + str(alert.revision) + '/'
         signoff = "\n\nGood luck!"
 
+        ## - slack
+        try:
+            for webhook in webhooks:
+                slack_post("*" + subject + "* \n" + body, webhook)
+        except Exception as err:
+            print(err)
+            
         ## - text
-        for number, carrier in zip(numbers, carriers):
-            send_text(number, carrier, body + signoff)
-
-        continue
+        try:
+            for number, carrier in zip(numbers, carriers):
+                send_text(number, carrier, body + signoff)
+        except Exception as err:
+            print(err)
             
         ## - email
-        for receiving_email in receiving_emails:
-            send_email(body + signoff, subject, receiving_email)
-
-        ## - slack
-        for webhook in webhooks:
-            slack_post("*" + subject + "* \n" + body, webhook)
+        try:
+            for receiving_email in receiving_emails:
+                send_email(body + signoff, subject, receiving_email)
+        except Exception as err:
+            print(err)
             
 else:
     # heartbeat email
