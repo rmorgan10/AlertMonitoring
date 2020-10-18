@@ -8,7 +8,7 @@ from alert_properties import make_alert_list
 from observability import Event
 from utils import ctio, kpno
 from plots import make_plots
-from reporting import event_page, send_email, git_push
+from reporting import event_page, send_email, git_push, main_page
 
 def send_alert_email(alert, receiver):
     subject = alert.name
@@ -50,8 +50,9 @@ if len(alerts) != 0:
                      
         # create a webpage
         event_page(alert, events)
+        main_page(alert)
         git_push("add {} information".format(alert.name + '_' + str(alert.revision)))
-        
+
         # send emails
         for receiving_email in receiving_emails:
             send_alert_email(alert, receiving_email)

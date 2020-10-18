@@ -62,6 +62,15 @@ def event_page(alert, events):
         
     return
 
+def main_page(alert):
+    os.chdir('..')
+    name = alert.name + '_' + str(alert.revision)
+    link = "https://rmorgan10.github.io/AlertMonitoring/" + name + '/'
+    with open('README.md', 'a') as stream:
+        stream.write('- [{0}]({1})'.format(name, link))
+    os.chdir('code')
+    return
+
 def git_push(message="commit message"):
     os.chdir('..')
     os.system('git add .')
