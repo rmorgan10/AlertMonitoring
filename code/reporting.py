@@ -48,7 +48,9 @@ def event_page(alert, events):
               "%.6f" %(alert.far) + " | %.2f |\n\n" %(math.pi * (alert.err90 / 60)**2) +
               "[Link to IceCube Alert Details](https://gcn.gsfc.nasa.gov/gcn/notices_amon_g_b/"
               "{0}_{1}.amon)\n\n".format(alert.run_num, alert.event_num) +
-              "![]({}_skymap.png)\n\n".format(event.observatory.name)) 
+              '<a href="https://rmorgan10.github.io/AlertMonitoring/{0}/{1}_skymap.png" target="_blank">\n'.format(alert.name, event.observatory.name) +
+              '  <img src="{0}_skymap.png" alt="{1} Skymap" style="width:700px;height:400px;">\n'.format(event.observatory.name, event.observatory.name) +
+              '</a>\n\n')
     
     for event in events:
         report += ("\n## {} Report\n\n".format(event.observatory.name) +
@@ -58,9 +60,14 @@ def event_page(alert, events):
             report += line + '\n'
 
         report += ("```\n### Observability Plots\n\n"
-                   "![]({}_forecast.png)\n\n".format(event.observatory.name) +
-                   "![]({}_airmass.png)\n".format(event.observatory.name) +
-                   "![]({}_fov.png)\n".format(event.observatory.name))
+                   '<a href="https://rmorgan10.github.io/AlertMonitoring/{0}/{1}_forecast.png" target="_blank">\n'.format(alert.name, event.observatory.name) +
+                   '  <img src="{0}_forecast.png" alt="{1} Forecast" style="width:700px;height:233px;">\n'.format(event.observatory.name, event.observatory.name) +
+                   '</a>\n\n'
+                   '<a href="https://rmorgan10.github.io/AlertMonitoring/{0}/{1}_airmass.png" target="_blank">\n'.format(alert.name, event.observatory.name) +
+                   '  <img src="{0}_airmass.png" alt="{1} Airmass" style="width:320px;height:320px;">\n'.format(event.observatory.name, event.observatory.name) +
+                   '</a>\n'
+                   '<a href="https://rmorgan10.github.io/AlertMonitoring/{0}/{1}_fov.png" target="_blank">\n'.format(alert.name, event.observatory.name) +
+                   '  <img src="{0}_fov.png" alt="{1} FoV" style="width:320px;height:320px;">\n</a>\n\n'.format(event.observatory.name, event.observatory.name))
 
     # create README file
     filename = '../' + alert.name + '_' + str(alert.revision) + '/README.md'
