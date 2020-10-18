@@ -45,7 +45,7 @@ if len(alerts) != 0:
         # process events
         events = []
         for observatory in observatories:
-            event = Event(alert.ra, alert.dec, observatory, eventid=alert.name)
+            event = Event(alert.ra, alert.dec, observatory, eventid=alert.name, search_time=alert.time_UT)
             events.append(event)
             
             # make all observability plots
