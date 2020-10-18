@@ -77,7 +77,7 @@ class Event:
         self.minimum_airmass = np.min(airmass_array[cut])
         optimal_time_shift = time_shift_array[cut][np.argmin(airmass_array[cut])]
         self.optimal_time = ephem.Date(self.search_time + optimal_time_shift)
-        optimal_madison_time = self.optimal_time.to_datetime() - datetime.timedelta(hours=5)
+        optimal_madison_time = self.optimal_time.datetime() - datetime.timedelta(hours=5)
         self.optimal_madison_time = optimal_madison_time.strftime("%Y/%m/%d %H:%M:%S")
         return
 
