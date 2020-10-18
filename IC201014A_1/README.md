@@ -37,6 +37,10 @@ Galactic
 ```
 ### Observability Plots
 
+ <a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_forecast.png" target="_blank">
+  <img src="CTIO_forecast.png" alt="CTIO Forecast" style="width:500px;height:200px;">
+</a> 
+
 ![](CTIO_forecast.png)
 
 ![](CTIO_airmass.png)
