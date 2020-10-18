@@ -70,11 +70,11 @@ if len(alerts) != 0:
             print(err)
             
         ## - text
-        try:
-            for number, carrier in zip(numbers, carriers):
-                send_text(number, carrier, body + signoff)
-        except Exception as err:
-            print(err)
+        #try:
+        #    for number, carrier in zip(numbers, carriers):
+        #        send_text(number, carrier, body + signoff)
+        #except Exception as err:
+        #    print(err)
             
         ## - email
         try:
