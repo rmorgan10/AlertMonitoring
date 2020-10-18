@@ -46,7 +46,7 @@ def event_page(alert, events):
               "![](skymap.png)\n\n") 
     
     for event in events:
-        report += "{} Report\n\n### Alert Diagnostics\n\n```".format(event.observatory.name)
+        report += "\n## {} Report\n\n### Alert Diagnostics\n\n```".format(event.observatory.name)
         for line in event.diagnostics(return_lines=True):
             report += line + '\n'
 
