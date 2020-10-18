@@ -136,3 +136,5 @@ dmypy.json
 
 # passwords
 code/.cred
+code/.emails
+code/.phones

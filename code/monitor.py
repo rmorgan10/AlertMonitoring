@@ -19,7 +19,13 @@ def send_alert_email(alert, receiver):
     send_email(body, subject, receiver)
     return
 
-receiving_emails = ['robert.morgan@wisc.edu']
+with open(".emails", 'r') as f:
+    receiving_emails = [x.strip() for x in f.readlines()]
+
+with open(".phones", 'r') as f:
+    _data = [x.strip() for x in f.readlines()]
+    numbers = [x.split(',')[0] for x in _data]
+    carriers = [x.split(',')[1] for x in _data]
     
 
 observatories = [ctio(), kpno()]
