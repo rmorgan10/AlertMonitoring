@@ -37,14 +37,17 @@ Galactic
 ```
 ### Observability Plots
 
- <a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_forecast.png" target="_blank">
-  <img src="CTIO_forecast.png" alt="CTIO Forecast" style="width:500px;height:200px;">
+<a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_forecast.png" target="_blank">
+  <img src="CTIO_forecast.png" alt="CTIO Forecast" style="width:600px;height:300px;">
 </a> 
 
-![](CTIO_forecast.png)
+<a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_airmass.png" target="_blank">
+  <img src="CTIO_airmass.png" alt="CTIO Airmass" style="width:300px;height:300px;">
+</a> 
+<a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_fov.png" target="_blank">
+  <img src="CTIO_fov.png" alt="CTIO FoV" style="width:300px;height:300px;">
+</a> 
 
-![](CTIO_airmass.png)
-![](CTIO_fov.png)
 KPNO Report
 
 ### Alert Diagnostics
