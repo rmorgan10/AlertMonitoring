@@ -48,8 +48,8 @@ def event_page(alert, events):
               "%.6f" %(alert.far) + " | %.2f |\n\n" %(math.pi * (alert.err90 / 60)**2) +
               "[Link to IceCube Alert Details](https://gcn.gsfc.nasa.gov/gcn/notices_amon_g_b/"
               "{0}_{1}.amon)\n\n".format(alert.run_num, alert.event_num) +
-              '<a href="https://rmorgan10.github.io/AlertMonitoring/{0}/{1}_skymap.png" target="_blank">\n'.format(alert.name, event.observatory.name) +
-              '  <img src="{0}_skymap.png" alt="{1} Skymap" style="width:700px;height:400px;">\n'.format(event.observatory.name, event.observatory.name) +
+              '<a href="https://rmorgan10.github.io/AlertMonitoring/{0}/{1}_skymap.png" target="_blank">\n'.format(alert.name, events[0].observatory.name) +
+              '  <img src="{0}_skymap.png" alt="{1} Skymap" style="width:700px;height:400px;">\n'.format(events[0].observatory.name, events[0].observatory.name) +
               '</a>\n\n')
     
     for event in events:
