@@ -137,12 +137,11 @@ def plot_fov(event, alert):
         raise NotImplementedError("Only CTIO and KPNO are allowed observatories.")
     
     # plot params
-    for ax in axs:
-        ax.set_xlabel("RA [degrees]", fontsize=16)
-        ax.set_ylabel("Dec [degrees]", fontsize=16)
-        ax.tick_params(axis='x', labelsize=14)
-        ax.tick_params(axis='y', labelsize=14)
-        ax.set_xlim(ax.get_xlim()[1], ax.get_xlim()[0])
+    ax.set_xlabel("RA [degrees]", fontsize=16)
+    ax.set_ylabel("Dec [degrees]", fontsize=16)
+    ax.tick_params(axis='x', labelsize=14)
+    ax.tick_params(axis='y', labelsize=14)
+    ax.set_xlim(ax.get_xlim()[1], ax.get_xlim()[0])
     fig.tight_layout()    
     
     return fig, ax

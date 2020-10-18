@@ -42,7 +42,7 @@ if len(alerts) != 0:
         # process events
         events = []
         for observatory in observatories:
-            event = Event(alert.ra, alert.dec, observatory, event_id=alert.name)
+            event = Event(alert.ra, alert.dec, observatory, eventid=alert.name)
             events.append(event)
             
             # make all observability plots
@@ -59,7 +59,7 @@ if len(alerts) != 0:
             
 else:
     # heartbeat email
-    current_time = datetime.now()
+    current_time = datetime.datetime.now()
     if current_time.hour == 9 and current_time.minute > 28 and current_time.minute < 33:
         send_email("I am alive and well!", "Yooo", "robert.morgan@wisc.edu")
     

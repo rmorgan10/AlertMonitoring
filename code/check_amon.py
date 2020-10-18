@@ -53,7 +53,7 @@ class AMON:
         # format new alerts
         out_data = []
         for index, row in self.new_events.iterrows():
-            out_data.append(row['RunNum_EventNum'] + ',' + str(row['Rev']) + '\n')
+            out_data.append(row['RunNum_EventNum'] + ',' + str(int(row['Rev'])) + '\n')
         full_alerts = [existing_alerts[0]] + out_data + existing_alerts[1:]
         
         # write all alerts

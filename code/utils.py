@@ -79,7 +79,7 @@ def getAirmass(lon_zenith, lat_zenith, lon, lat):
 
 ############################################################
 
-def openEBVMap(infile='data/lambda_sfd_ebv.fits', column='TEMPERATURE'):
+def openEBVMap(infile='../data/lambda_sfd_ebv.fits', column='TEMPERATURE'):
     reader = fits.open(infile)
     m = reader[1].data[column]
     reader.close()
@@ -98,7 +98,7 @@ def angToPix(nside, lon, lat):
 ############################################################
 
 def desPoly():
-    infile = 'data/round13-poly.txt'
+    infile = '../data/round13-poly.txt'
     data = np.genfromtxt(infile, names=['ra', 'dec'])
     return data
 
