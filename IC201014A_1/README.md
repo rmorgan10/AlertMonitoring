@@ -6,8 +6,8 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | BRONZE | 10/14/2020  02:13:27 | 146.930 | 0.414 | 1.706900 | 2.22 |
 
-a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_skymap.png" target="_blank">
-  <img src="CTIO_skymap.png" alt="CTIO Skymap" style="width:700px;height:233px;">
+<a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_skymap.png" target="_blank">
+  <img src="CTIO_skymap.png" alt="CTIO Skymap" style="width:700px;height:400px;">
 </a> 
 
 CTIO Report
@@ -44,10 +44,10 @@ Galactic
 </a> 
 
 <a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_airmass.png" target="_blank">
-  <img src="CTIO_airmass.png" alt="CTIO Airmass" style="width:345px;height:345px;">
+  <img src="CTIO_airmass.png" alt="CTIO Airmass" style="width:320px;height:320px;">
 </a> 
 <a href="https://rmorgan10.github.io/AlertMonitoring/IC201014A_1/CTIO_fov.png" target="_blank">
-  <img src="CTIO_fov.png" alt="CTIO FoV" style="width:345px;height:345px;">
+  <img src="CTIO_fov.png" alt="CTIO FoV" style="width:320px;height:320px;">
 </a> 
 
 KPNO Report
