@@ -1,7 +1,9 @@
-import numpy as np
+# functions to perform calculations
+
 from astropy.io import fits
-import healpy
 import ephem
+import healpy
+import numpy as np
 
 ############################################################
 
