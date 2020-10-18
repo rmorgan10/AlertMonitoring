@@ -141,7 +141,7 @@ def plot_fov(event, alert):
     ax.set_ylabel("Dec [degrees]", fontsize=16)
     ax.tick_params(axis='x', labelsize=14)
     ax.tick_params(axis='y', labelsize=14)
-    ax.set_xlim(ax.get_xlim()[1], ax.get_xlim()[0])
+    ax.set_xlim(ax.get_xlim()[1] + 0.2, ax.get_xlim()[0] - 0.2)
     fig.tight_layout()    
     
     return fig, ax
