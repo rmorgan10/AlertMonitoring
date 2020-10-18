@@ -43,7 +43,7 @@ def event_page(alert, events):
               alert.time_UT.strftime("%m/%d/%Y  %H:%M:%S") + " | "
               "%.3f" %(alert.energy) + " | " + "%.3f" %(alert.signalness) + " | "
               "%.6f" %(alert.far) + " | %.2f |\n\n" %(math.pi * (alert.err90 / 60)**2) +
-              "![](skymap.png)\n\n") 
+              "![]({}_skymap.png)\n\n".format(event.observatory.name)) 
     
     for event in events:
         report += "\n## {} Report\n\n### Alert Diagnostics\n\n```".format(event.observatory.name)
