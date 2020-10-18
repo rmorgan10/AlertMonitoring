@@ -8,17 +8,9 @@ from alert_properties import make_alert_list
 from observability import Event
 from utils import ctio, kpno
 from plots import make_plots
-from reporting import event_page, send_email, git_push, main_page
+from reporting import event_page, send_email, git_push, main_page, send_text, slack_post
 
-def send_alert_email(alert, receiver):
-    subject = alert.name
-    body = "https://rmorgan10.github.io/AlertMonitoring/"
-    body += alert.name + '_' + str(alert.revision) + '/\n\n'
-    body += "Good luck!"
-    
-    send_email(body, subject, receiver)
-    return
-
+# Read protected information
 with open(".emails", 'r') as f:
     receiving_emails = [x.strip() for x in f.readlines()]
 
@@ -26,10 +18,12 @@ with open(".phones", 'r') as f:
     _data = [x.strip() for x in f.readlines()]
     numbers = [x.split(',')[0] for x in _data]
     carriers = [x.split(',')[1] for x in _data]
-    
 
-observatories = [ctio(), kpno()]
+with open(".webhooks", 'r') as f:
+    webhooks = [x.strip() for x in f.readlines()]
 
+
+# Check for alerts
 alerts = []
 for stream in [AMON()]:
     
@@ -39,6 +33,9 @@ for stream in [AMON()]:
         
 if len(alerts) != 0:
     # New Alert!
+
+    # Initialize observatories
+    observatories = [ctio(), kpno()]
     
     for alert in alerts:
         
@@ -59,9 +56,23 @@ if len(alerts) != 0:
         main_page(alert)
         git_push("add {} information".format(alert.name + '_' + str(alert.revision)))
 
-        # send emails
+        # alert us
+        subject = alert.name
+        body = "https://rmorgan10.github.io/AlertMonitoring/"
+        body += alert.name + '_' + str(alert.revision) + '/'
+        signoff = "\n\nGood luck!"
+
+        ## - text
+        for number, carrier in zip(numbers, carriers):
+            send_text(number, carrier, body + signoff)
+
+        ## - email
         for receiving_email in receiving_emails:
-            send_alert_email(alert, receiving_email)
+            send_email(body + signoff, subject, receiving_email)
+
+        ## - slack
+        for webhook in webhooks:
+            slack_post("*" + subject + "* \n" + body, webhook)
             
 else:
     # heartbeat email
