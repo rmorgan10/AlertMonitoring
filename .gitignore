@@ -133,3 +133,6 @@ dmypy.json
 
 # jupyter notebooks
 *.ipynb
+
+# passwords
+code/.cred

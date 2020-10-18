@@ -43,10 +43,14 @@ def event_page(alert, events):
               alert.time_UT.strftime("%m/%d/%Y  %H:%M:%S") + " | "
               "%.3f" %(alert.energy) + " | " + "%.3f" %(alert.signalness) + " | "
               "%.6f" %(alert.far) + " | %.2f |\n\n" %(math.pi * (alert.err90 / 60)**2) +
+              "[Link to IceCube Alert Details](https://gcn.gsfc.nasa.gov/gcn/notices_amon_g_b/"
+              "{0}_{1}.amon)\n\n".format(alert.run_num, alert.event_num) +
               "![]({}_skymap.png)\n\n".format(event.observatory.name)) 
     
     for event in events:
-        report += "\n## {} Report\n\n### Alert Diagnostics\n\n```".format(event.observatory.name)
+        report += ("\n## {} Report\n\n".format(event.observatory.name) +
+                   "### Observations Start at {} Madison Time".format(event.optimal_madison_time) + 
+                   "### Alert Diagnostics\n\n```")
         for line in event.diagnostics(return_lines=True):
             report += line + '\n'
 
@@ -77,4 +81,27 @@ def git_push(message="commit message"):
     os.system('git commit -m "{}"'.format(message))
     os.system('git push')
     os.chdir('code')
+    return
+
+def text_message(to_number, carrier, message):
+
+    with open('.cred', 'r') as creds:
+        auth = [x.strip() for x in creds.readlines()]
+
+    carriers = {'att': '@mms.att.net',
+                'tmobile': '@tmomail.net',
+                'verizon': '@vtext.com',
+                'sprint': '@page.nextel.com'}
+
+    to_address = to_number + get_carrier_address(carrier)
+
+    # Log in to gmail account
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.ehlo()
+    server.starttls()
+    server.login(auth[0], auth[1])
+
+    # send message
+    server.sendmail(auth[0], to_address, message)
+    
     return
