@@ -84,7 +84,7 @@ def event_page(alert, events):
 def _sort_alerts(alerts):
     alert_dict = {}
     for alert in alerts:
-        name = alert.split('[IC')[0].split('A_')[-1]
+        name = alert.split('[IC')[1].split('A_')[-1]
         year = int('20' + name[0:2])
         month = int(name[2:4])
         day = int(name[4:6])
