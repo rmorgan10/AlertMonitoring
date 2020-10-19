@@ -1,5 +1,6 @@
 # functions to create reports
 
+import datetime
 from email.mime.text import MIMEText
 import json
 import math
@@ -80,12 +81,63 @@ def event_page(alert, events):
         
     return
 
+def _sort_alerts(alerts):
+    alert_dict = {}
+    for alert in alerts:
+        name = alert.split('[IC')[0].split('A_')[-1]
+        year = int('20' + name[0:2])
+        month = int(name[2:4])
+        day = int(name[4:6])
+
+        # load into a dictionary
+        if year in alert_dict.keys():
+            if month in alert_dict[year].keys():
+                if day in alert_dict[year][month].keys():
+
+                    alert_dict[year][month][day].append(alert)
+                else:
+                    alert_dict[year][month][day] = [alert]
+            else:
+                alert_dict[year][month] = {day : [alert]}
+        else:
+            alert_dict[year] = {month : {day : [alert]}}
+    
+    # iterate through the dictionary and build of the sorted alerts
+    month_map = {1: 'January', 2: 'February', 3: 'March', 4: 'April',
+                 5: 'May', 6: 'June', 7: 'July', 8: 'August', 9: 'September',
+                 10: 'October', 11: 'November', 12: 'December'}
+
+    out_alerts = []
+    for year in sorted(alert_dict.keys(), reverse=True):
+        out_alerts.append('### ' + str(year) + '\n')
+        for month in sorted(alert_dict[year].keys(), reverse=True):
+            out_alerts.append('**' + month_map[month] + '**\n\n')
+            for day in sorted(alert_dict[year][month].keys(), reverse=True):
+                for alert in alert_dict[year][month][day]:
+                    out_alerts.append(alert + '\n')
+            out_alerts.append('\n\n')
+
+    return out_alerts
+
 def main_page(alert):
     os.chdir('..')
     name = alert.name + '_' + str(alert.revision)
     link = "https://rmorgan10.github.io/AlertMonitoring/" + name + '/'
-    with open('README.md', 'a') as stream:
-        stream.write('\n- [{0}]({1})'.format(name, link))
+
+    # read all alerts and parse by date
+    stream = open('README.md', 'r')
+    lines = stream.readlines()
+    stream.close()
+
+    header = "# Alert Monitoring\n\nMonitoring IceCube GOLD and BRONZE alerts.\n\n## Alerts\n"
+    alerts = [x.strip() for x in lines if x.startswith('-')]
+    alerts.append('- [{0}]({1})'.format(name, link))
+    sorted_alerts = _sort_alerts(alerts)
+
+    stream = open('README.md', 'w+')
+    stream.writelines([header] + sorted_alerts)
+    stream.close()
+    
     os.chdir('code')
     return
 
