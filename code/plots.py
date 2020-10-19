@@ -1,5 +1,8 @@
 # Functions for generating plots
 
+import os
+os.environ['MPLCONFIGDIR'] = os.getcwd() + "/.configs/"
+
 import ephem
 import healpy
 import numpy as np
