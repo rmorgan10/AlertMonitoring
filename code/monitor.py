@@ -60,6 +60,8 @@ if len(alerts) != 0:
         subject = alert.name
         body = "https://rmorgan10.github.io/AlertMonitoring/"
         body += alert.name + '_' + str(alert.revision) + '/'
+        body += '\n\nBackup: https://github.com/rmorgan10/AlertMonitoring/blob/main/'
+        body += alert.name + '_' + str(alert.revision) + '/README.md'
         signoff = "\n\nGood luck!"
 
         ## - slack
