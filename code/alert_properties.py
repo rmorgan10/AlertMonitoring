@@ -1,5 +1,8 @@
 # A class to collect alert properties
 
+import glob
+import os
+
 import pandas as pd
 
 class Alert:
@@ -18,8 +21,17 @@ class Alert:
         self.revision = int(row['Rev'])
         self.time_UT = pd.to_datetime(str(row['Date']) + 'T' + str(row['Time UT']),
                                       format="%y/%m/%dT%H:%M:%S.%f")
-        self.name = "IC" + self.time_UT.strftime("%y%m%d") + 'A'
+        self._name = "IC" + self.time_UT.strftime("%y%m%d") 
+        self.name = self._name + self._find_suffix()
         return
+
+    def _find_suffix(self):
+        os.chdir('..')
+        today_alerts = glob.glob(self._name + '*_' + str(self.revision))
+        os.chdir('code')
+        letters = set([x[8] for x in today_alerts])
+        return chr(65 + len(letters))
+
         
 def make_alert_list(amon_df):
     alerts = []
