@@ -139,3 +139,4 @@ code/.cred
 code/.emails
 code/.phones
 code/.webhooks
+*.log
