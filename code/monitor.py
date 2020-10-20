@@ -70,11 +70,11 @@ if len(alerts) != 0:
         signoff = "\n\nGood luck!"
 
         ## - slack
-        try:
-            for webhook in webhooks:
-                slack_post("*" + subject + "* \n" + body, webhook)
-        except Exception as err:
-            print(err)
+        #try:
+        #    for webhook in webhooks:
+        #        slack_post("*" + subject + "* \n" + body, webhook)
+        #except Exception as err:
+        #    print(err)
             
         ## - text
         #try:
