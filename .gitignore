@@ -140,4 +140,4 @@ code/.emails
 code/.phones
 code/.webhooks
 *.log
-wipe_log.py
+code/wipe_log.py
