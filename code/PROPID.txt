@@ -1,0 +1,3 @@
+#Observatory: PROPID
+CTIO: 2020B-0282
+KPNO: 2021A-0246

@@ -6,7 +6,7 @@ import json
 
 import numpy as np
 
-def create_obs(event, alert, prop_id, bands=['g', 'r', 'i'], dithers=2, exposures=1, exptime=150):
+def create_obs(event, alert, prop_id, bands, dithers, exposures, exptime):
     
     sispi_dict_base = odict([
         ("filter",  None),
@@ -68,4 +68,57 @@ def read_json(filename, **kwargs):
 
 
 def choose_bands(event):
+    moony = event.moon_sep < 60.0 or event.moon_phase > 0.4
+
+    if event.observatory.name == 'CTIO':
+        if moony:
+            return ['r', 'i', 'z']
+        else:
+            return ['g', 'r', 'i']
+
+    elif event.observatory.name == 'KPNO':
+        return ["r'", "i'"]
+
+    else:
+        raise NotImplementedError("Only CTIO and KPNO are built into the JSON functions")
+
+def load_propid(event):
+    with open('PROPID.txt', 'r') as f:
+        for line in f.readlines():
+            if line[0] == '#':
+                continue
+                
+            clean_line = line.strip()
+            observatory = clean_line.split(':')[0].strip().upper()
+
+            if observatory == event.observatory.name:
+                propid = clean_line.split(':')[1].strip()
+                return propid
+
+        # If we get here, observaotry name was not found
+        raise ValueError(f"{event.observatory.name} is not found in PROPID.txt")
+        
+
+def generate_script(outfile, event, alert, 
+                    propid=None, bands=None, dithers=None, exposures=None, exptime=None):
+
+    if bands is None:
+        bands = choose_bands(event)
+
+    if propid is None:
+        propid = load_propid(event)
+
+    if dithers is None:
+        dithers = 2
+    
+    if exposures is None:
+        exposures = 1
+
+    if exptime is None:
+        exptime = 150
+        
+
+    json_data = create_obs(event, alert, propid, bands, dithers, exposures, exptime)
+    write_json(outfile, json_data)
+
     return
