@@ -22,7 +22,7 @@ for stream in [AMON()]:
         
 if len(alerts) != 0:
     # New Alert!
-
+    
     # Read protected information
     with open(".emails", 'r') as f:
         receiving_emails = [x.strip() for x in f.readlines()]
@@ -34,6 +34,12 @@ if len(alerts) != 0:
 
     with open(".webhooks", 'r') as f:
         webhooks = [x.strip() for x in f.readlines()]
+
+    # inform me
+    send_email(("Reprot is being produced\n\n"
+                "https://gcn.gsfc.nasa.gov/gcn/amon_icecube_gold_bronze_events.html"), 
+               "There is an alert", receiving_emails[0])
+
 
     # Initialize observatories
     observatories = [ctio(), kpno()]
