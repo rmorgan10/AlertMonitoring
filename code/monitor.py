@@ -3,12 +3,14 @@
 import datetime
 import os
 
-from check_amon import AMON
 from alert_properties import make_alert_list
+from check_amon import AMON
+from make_json import generate_script
 from observability import Event
-from utils import ctio, kpno
 from plots import make_plots
 from reporting import event_page, send_email, git_push, main_page, send_text, slack_post
+from utils import ctio, kpno
+
 
 # Read protected information
 with open(".emails", 'r') as f:
@@ -50,6 +52,9 @@ if len(alerts) != 0:
             
             # make all observability plots
             make_plots(event, alert)
+
+            # generate observing scripts
+            generate_script(event, alert)
                      
         # create a webpage
         event_page(alert, events)

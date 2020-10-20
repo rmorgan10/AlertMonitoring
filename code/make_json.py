@@ -99,8 +99,7 @@ def load_propid(event):
         raise ValueError(f"{event.observatory.name} is not found in PROPID.txt")
         
 
-def generate_script(outfile, event, alert, 
-                    propid=None, bands=None, dithers=None, exposures=None, exptime=None):
+def generate_script(event, alert, propid=None, bands=None, dithers=None, exposures=None, exptime=None, outfile=None):
 
     if bands is None:
         bands = choose_bands(event)
@@ -117,6 +116,8 @@ def generate_script(outfile, event, alert,
     if exptime is None:
         exptime = 150
         
+    if outfile is None:
+        outfile = '../' + alert.name + '_' + str(alert.revision) + '/' + event.observatory.name + '.json'
 
     json_data = create_obs(event, alert, propid, bands, dithers, exposures, exptime)
     write_json(outfile, json_data)

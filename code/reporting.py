@@ -55,7 +55,9 @@ def event_page(alert, events):
     
     for event in events:
         report += ("\n## {} Report\n\n".format(event.observatory.name) +
-                   "*Observations Start at*  `{}`  *Madison Time*".format(event.optimal_madison_time) + 
+                   "**Observations Start at**  `{}`  **Madison Time**".format(event.optimal_madison_time) +
+                   '\n\n<a href="https://github.com/rmorgan10/AlertMonitoring/blob/main/{0}/{1}.json" target="_blank">'.format(alert.name + '_' + str(alert.revision), event.observatory.name) +
+                   'Link to Observing Scripts'
                    "\n\n### Alert Diagnostics\n\n```")
         for line in event.diagnostics(return_lines=True):
             report += line + '\n'
