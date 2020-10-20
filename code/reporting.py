@@ -143,6 +143,7 @@ def main_page(alert):
     return
 
 def git_push(message="commit message"):
+    # push new files to remote repo
     os.chdir('..')
     os.system('git add .')
     os.system('git commit -m "{}"'.format(message))
