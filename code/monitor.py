@@ -36,7 +36,7 @@ if len(alerts) != 0:
         webhooks = [x.strip() for x in f.readlines()]
 
     # inform me
-    send_email(("Reprot is being produced\n\n"
+    send_email(("An observability report is currently being produced.\n\n"
                 "https://gcn.gsfc.nasa.gov/gcn/amon_icecube_gold_bronze_events.html"), 
                "There is an alert", receiving_emails[0])
 
