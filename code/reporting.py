@@ -146,7 +146,7 @@ def git_push(message="commit message"):
     os.chdir('..')
     os.system('git add .')
     os.system('git commit -m "{}"'.format(message))
-    os.system('git push >> monitor.log')
+    os.system('git push &> monitor.log')
     os.chdir('code')
     return
 
