@@ -56,7 +56,7 @@ def write_json(outfile, data, **kwargs):
     kwargs.setdefault('indent', 4)
     json.encoder.FLOAT_REPR = lambda o: format(o, '.4f')
 
-    with open(outfile, 'wb') as out:
+    with open(outfile, 'w+', encoding="utf8") as out:
         out.write(json.dumps(data, **kwargs))
 
     return
