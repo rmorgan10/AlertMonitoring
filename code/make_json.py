@@ -72,7 +72,7 @@ def choose_bands(event):
     if not hasattr(event, 'moon_sep'):
         event.diagnostics(return_lines=False)
 
-    moony = event.moon_sep < 60.0 or event.moon_phase > 0.4
+    moony = event.moon_sep < 60.0 or event.moon_illum > 0.4
 
     if event.observatory.name == 'CTIO':
         if moony:
