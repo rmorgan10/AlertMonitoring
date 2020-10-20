@@ -12,19 +12,6 @@ from reporting import event_page, send_email, git_push, main_page, send_text, sl
 from utils import ctio, kpno
 
 
-# Read protected information
-with open(".emails", 'r') as f:
-    receiving_emails = [x.strip() for x in f.readlines()]
-
-with open(".phones", 'r') as f:
-    _data = [x.strip() for x in f.readlines()]
-    numbers = [x.split(',')[0] for x in _data]
-    carriers = [x.split(',')[1] for x in _data]
-
-with open(".webhooks", 'r') as f:
-    webhooks = [x.strip() for x in f.readlines()]
-
-
 # Check for alerts
 alerts = []
 for stream in [AMON()]:
@@ -35,6 +22,18 @@ for stream in [AMON()]:
         
 if len(alerts) != 0:
     # New Alert!
+
+    # Read protected information
+    with open(".emails", 'r') as f:
+        receiving_emails = [x.strip() for x in f.readlines()]
+
+    with open(".phones", 'r') as f:
+        _data = [x.strip() for x in f.readlines()]
+        numbers = [x.split(',')[0] for x in _data]
+        carriers = [x.split(',')[1] for x in _data]
+
+    with open(".webhooks", 'r') as f:
+        webhooks = [x.strip() for x in f.readlines()]
 
     # Initialize observatories
     observatories = [ctio(), kpno()]
