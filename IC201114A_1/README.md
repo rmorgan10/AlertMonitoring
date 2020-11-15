@@ -17,7 +17,7 @@
 
 **Observations Start at**  `2020/11/15 03:05:52`  **Madison Time**
 
-<a href="https://github.com/rmorgan10/AlertMonitoring/blob/main/IC201114A_1/CTIO.json" target="_blank">Link to Observing Scripts
+<a href="https://github.com/rmorgan10/AlertMonitoring/blob/main/IC201114A_1/IC201114_20201115_4.json" target="_blank">Link to Observing Scripts
 
 ### Alert Diagnostics
 
