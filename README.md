@@ -7,6 +7,7 @@ Monitoring IceCube GOLD and BRONZE alerts.
 **February**
 
 - [IC210210A_0](https://rmorgan10.github.io/AlertMonitoring/IC210210A_0/)
+- [IC210210A_1](https://rmorgan10.github.io/AlertMonitoring/IC210210A_1/)
 
 
 ### 2020
