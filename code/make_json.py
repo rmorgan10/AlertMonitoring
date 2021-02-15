@@ -35,7 +35,7 @@ def create_obs(event, alert, prop_id, bands, dithers, exposures, exptime):
             for idx_exposure in range(exposures):
 
                 sispi_dict = copy.deepcopy(sispi_dict_base)
-                tag = "DESNU: IceCube event %s: %i of %i"%(seqid, seqnum, seqtot)
+                tag = "DESNU %s hex %i of %i"%(seqid, seqnum, seqtot)
 
                 sispi_dict["RA"]      = alert.ra + (idx_dither * (1. / 60.) / np.cos(np.radians(alert.dec)))
                 sispi_dict["dec"]     = alert.dec + (idx_dither * (1. / 60.))
