@@ -7,6 +7,7 @@ Monitoring IceCube GOLD and BRONZE alerts.
 **July**
 
 - [IC210730A_0](https://rmorgan10.github.io/AlertMonitoring/IC210730A_0/)
+- [IC210730A_1](https://rmorgan10.github.io/AlertMonitoring/IC210730A_1/)
 
 
 **June**
