@@ -4,6 +4,11 @@ Monitoring IceCube GOLD and BRONZE alerts.
 
 ## Alerts
 ### 2021
+**September**
+
+- [IC210922A_0](https://rmorgan10.github.io/AlertMonitoring/IC210922A_0/)
+
+
 **August**
 
 - [IC210811A_0](https://rmorgan10.github.io/AlertMonitoring/IC210811A_0/)
