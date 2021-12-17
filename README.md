@@ -9,6 +9,7 @@ Monitoring IceCube GOLD and BRONZE alerts.
 - [IC211216A_0](https://rmorgan10.github.io/AlertMonitoring/IC211216A_0/)
 - [IC211216A_1](https://rmorgan10.github.io/AlertMonitoring/IC211216A_1/)
 - [IC211216B_0](https://rmorgan10.github.io/AlertMonitoring/IC211216B_0/)
+- [IC211216B_1](https://rmorgan10.github.io/AlertMonitoring/IC211216B_1/)
 - [IC211208A_0](https://rmorgan10.github.io/AlertMonitoring/IC211208A_0/)
 - [IC211208A_1](https://rmorgan10.github.io/AlertMonitoring/IC211208A_1/)
 
