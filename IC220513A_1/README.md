@@ -1,0 +1,104 @@
+# IC220513A (136627_61640402)
+
+### IceCube Data
+
+| Rev | Type | Time (UTC) | Energy (TeV) | Signalness | FAR (#/yr) | 90% Area (sq. deg.) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | GOLD | 05/13/2022  23:23:12 | 207.920 | 0.560 | 0.942500 | 3.40 |
+
+<a href="https://gcn.gsfc.nasa.gov/gcn/notices_amon_g_b/136627_61640402.amon" target="_blank">Link to IceCube Alert Details</a>
+
+<a href="https://rmorgan10.github.io/AlertMonitoring/IC220513A_1/CTIO_skymap.png" target="_blank">
+  <img src="CTIO_skymap.png" alt="CTIO Skymap" style="width:700px;height:400px;">
+</a>
+
+
+## CTIO Report
+
+**Observations Start at**  `2022/05/13 23:12:58`  **Madison Time**
+
+<a href="https://github.com/rmorgan10/AlertMonitoring/blob/main/IC220513A_1/CTIO.json" target="_blank">Link to Observing Scripts
+
+### Alert Diagnostics
+
+```Event
+  Event ID = IC220513A
+  (ra, dec) = (224.0300, -1.3400)
+Date
+  Now = 2022/5/14 02:17:17 (UTC)
+  Search time = 2022/5/13 23:23:13 (UTC)
+  Optimal time = 2022/5/14 04:12:58 (UTC)
+  Airmass at optimal time = 1.14
+Sun
+  Angular separation = 161.43 (deg)
+  Next rising = 2022/5/14 11:20:34 (UTC)
+  Next setting = 2022/5/14 21:58:21 (UTC)
+Moon
+  Illumination = 0.95
+  Angular separation = 19.89 (deg)
+  Next rising = 2022/5/14 21:02:18 (UTC)
+  Next setting = 2022/5/14 09:28:19 (UTC)
+  Next new moon = 2022/5/30 11:30:13 (UTC)
+  Next full moon = 2022/5/16 04:14:05 (UTC)
+Galactic
+  (l, b) = (354.4818, 48.6449)
+  E(B-V) = 0.84
+```
+### Observability Plots
+
+<a href="https://rmorgan10.github.io/AlertMonitoring/IC220513A_1/CTIO_forecast.png" target="_blank">
+  <img src="CTIO_forecast.png" alt="CTIO Forecast" style="width:700px;height:233px;">
+</a>
+
+<a href="https://rmorgan10.github.io/AlertMonitoring/IC220513A_1/CTIO_airmass.png" target="_blank">
+  <img src="CTIO_airmass.png" alt="CTIO Airmass" style="width:320px;height:320px;">
+</a>
+<a href="https://rmorgan10.github.io/AlertMonitoring/IC220513A_1/CTIO_fov.png" target="_blank">
+  <img src="CTIO_fov.png" alt="CTIO FoV" style="width:320px;height:320px;">
+</a>
+
+
+## KPNO Report
+
+**Observations Start at**  `2022/05/14 01:55:42`  **Madison Time**
+
+<a href="https://github.com/rmorgan10/AlertMonitoring/blob/main/IC220513A_1/KPNO.json" target="_blank">Link to Observing Scripts
+
+### Alert Diagnostics
+
+```Event
+  Event ID = IC220513A
+  (ra, dec) = (224.0300, -1.3400)
+Date
+  Now = 2022/5/14 02:17:17 (UTC)
+  Search time = 2022/5/13 23:23:13 (UTC)
+  Optimal time = 2022/5/14 06:55:42 (UTC)
+  Airmass at optimal time = 1.20
+Sun
+  Angular separation = 161.36 (deg)
+  Next rising = 2022/5/14 12:29:30 (UTC)
+  Next setting = 2022/5/14 02:15:42 (UTC)
+Moon
+  Illumination = 0.95
+  Angular separation = 18.77 (deg)
+  Next rising = 2022/5/13 23:48:22 (UTC)
+  Next setting = 2022/5/14 11:28:57 (UTC)
+  Next new moon = 2022/5/30 11:30:13 (UTC)
+  Next full moon = 2022/5/16 04:14:05 (UTC)
+Galactic
+  (l, b) = (354.4818, 48.6449)
+  E(B-V) = 0.84
+```
+### Observability Plots
+
+<a href="https://rmorgan10.github.io/AlertMonitoring/IC220513A_1/KPNO_forecast.png" target="_blank">
+  <img src="KPNO_forecast.png" alt="KPNO Forecast" style="width:700px;height:233px;">
+</a>
+
+<a href="https://rmorgan10.github.io/AlertMonitoring/IC220513A_1/KPNO_airmass.png" target="_blank">
+  <img src="KPNO_airmass.png" alt="KPNO Airmass" style="width:320px;height:320px;">
+</a>
+<a href="https://rmorgan10.github.io/AlertMonitoring/IC220513A_1/KPNO_fov.png" target="_blank">
+  <img src="KPNO_fov.png" alt="KPNO FoV" style="width:320px;height:320px;">
+</a>
+
