@@ -26,16 +26,31 @@ def create_obs(event, alert, prop_id, bands, dithers, exposures, exptime):
     ])
 
     seqnum = 1
-    seqtot = len(bands) * dithers * exposures
+    seqtot = len(bands) * dithers * exposures + 1  # +1 for the AOS exposure.
     seqid = alert.name
 
     sispi = []
+    
+    # Add initial 30-sec exposure to prime AOS after initial slew.
+    sispi_dict = copy.deepcopy(sispi_dict_base)
+    tag = "DESNU %s hex %i of %i"%(seqid, seqnum - 1, seqtot - 1)
+    sispi_dict["RA"]      = alert.ra
+    sispi_dict["dec"]     = alert.dec
+    sispi_dict["filter"]  = bands[0]
+    sispi_dict["seqnum"]  = seqnum
+    sispi_dict["seqtot"]  = seqtot
+    sispi_dict["object"]  = tag
+    sispi_dict["comment"] = tag
+    sispi_dict["seqid"]   = seqid
+    sispi_dict["exptime"] = 30
+    seqnum += 1
+    
     for band in bands:
         for idx_dither in range(dithers):
             for idx_exposure in range(exposures):
 
                 sispi_dict = copy.deepcopy(sispi_dict_base)
-                tag = "DESNU %s hex %i of %i"%(seqid, seqnum, seqtot)
+                tag = "DESNU %s hex %i of %i"%(seqid, seqnum - 1, seqtot - 1)
 
                 sispi_dict["RA"]      = alert.ra + (idx_dither * (1. / 60.) / np.cos(np.radians(alert.dec)))
                 sispi_dict["dec"]     = alert.dec + (idx_dither * (1. / 60.))
