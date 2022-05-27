@@ -27,10 +27,10 @@ if len(alerts) != 0:
     with open(".emails", 'r') as f:
         receiving_emails = [x.strip() for x in f.readlines()]
 
-    with open(".phones", 'r') as f:
-        _data = [x.strip() for x in f.readlines()]
-        numbers = [x.split(',')[0] for x in _data]
-        carriers = [x.split(',')[1] for x in _data]
+    #with open(".phones", 'r') as f:
+    #    _data = [x.strip() for x in f.readlines()]
+    #    numbers = [x.split(',')[0] for x in _data]
+    #    carriers = [x.split(',')[1] for x in _data]
 
     with open(".webhooks", 'r') as f:
         webhooks = [x.strip() for x in f.readlines()]
