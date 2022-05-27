@@ -89,6 +89,8 @@ def get_centered_deg_fov(center_ra, center_dec):
 #Demos
 
 def plot_full_FOV(center_ra, center_dec):
+    import matplotlib
+    matplotlib.use('agg') # Use this backend for plotting in the background
     import matplotlib.pyplot as plt
 
     centered_deg_fov = get_centered_deg_fov(center_ra, center_dec)
