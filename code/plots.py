@@ -6,6 +6,8 @@ os.environ['MPLCONFIGDIR'] = os.getcwd() + "/.configs/"
 import ephem
 import healpy
 import numpy as np
+import matplotlib
+matplotlib.use('agg') # Use this backend for plotting in the background
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from matplotlib.patches import Circle, Rectangle

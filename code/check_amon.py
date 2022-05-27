@@ -22,10 +22,14 @@ class AMON:
         """
         Scrape all events from GOLD and BRONZE website
         """
-        web_data = pd.read_html(self.url)
-        data = web_data[0].values
-        columns = [x[1] for x in web_data[0].columns]
-        self.df = pd.DataFrame(data=data, columns=columns)
+        # Rob environment version
+        # web_data = pd.read_html(self.url)
+        # data = web_data[0].values
+        # columns = [x[1] for x in web_data[0].columns]
+        # self.df = pd.DataFrame(data=data, columns=columns)
+        
+        # Keith environment version
+        self.df = pd.read_html(self.url, skiprows=1, header=0)[0]
         return
 
     def _filter_new(self):
