@@ -62,9 +62,9 @@ if len(alerts) != 0:
             generate_script(event, alert)
                      
         # create a webpage
-        #event_page(alert, events)
-        #main_page(alert)
-        #git_push("add {} information".format(alert.name + '_' + str(alert.revision)))
+        event_page(alert, events)
+        main_page(alert)
+        git_push("add {} information".format(alert.name + '_' + str(alert.revision)))
 
         # alert us
         subject = alert.name
