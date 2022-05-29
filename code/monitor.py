@@ -99,5 +99,7 @@ else:
     # heartbeat email
     current_time = datetime.datetime.now()
     if current_time.hour == 9 and current_time.minute > 28 and current_time.minute < 33:
-        send_email("I am alive and well!", "Yooo", "robert.morgan@wisc.edu")
+        with open(".emails", 'r') as f:
+            receiving_email = [x.strip() for x in f.readlines()][0]
+        send_email("I am alive and well!", "Yooo", receiving_email)
     
